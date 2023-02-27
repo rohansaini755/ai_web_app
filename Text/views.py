@@ -20,17 +20,22 @@ def get_text_v1(request):
 
 @api_view(['GET'])
 def get_text(request):
-    text1 = Text.objects.first()
-    data = {}
-    data['name'] = text1.name
-    edata = text1.hindiText
-    hex_representation = edata.encode("utf-8").hex()
-    edata = hex_representation
-    data['hindiText'] = edata
-    data['englishText'] = text1.englishText
-    hdata = text1.hintString
-    hdata = hdata.encode("utf-8").hex()
-    data['hintString']  = hdata
-    res = Response(json.dumps(data))
+    text1 = Text.objects.all()
+    # data = {}
+    text = []
+    for it in text1:
+        data = {}    
+        data['name'] = it.name
+        edata = it.hindiText
+        hex_representation = edata.encode("utf-8").hex()
+        edata = hex_representation
+        data['hindiText'] = edata
+        data['englishText'] = it.englishText
+        hdata = it.hintString
+        hdata = hdata.encode("utf-8").hex()
+        data['hintString']  = hdata
+        text.append(data)
+
+    res = Response(json.dumps(text))
     res.headers["Access-Control-Allow-Origin"] = "*"
     return res
