@@ -27,4 +27,6 @@ urlpatterns = [
     path('api/signin/',au.signin),
     path('api/signout/',au.signout),
     path('api/add_text/',tv.add_text),
+    path('api/get_demo_text/',tv.get_demo_text),
+    path('api/update_text/',tv.update_text),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
